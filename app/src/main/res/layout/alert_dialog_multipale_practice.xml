@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayoutSuggestion"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/dialog_layout"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/five_dp"
+    android:visibility="visible">
+
+    <TextView
+        android:id="@+id/txt_edgLife"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/ten_dp"
+        android:paddingBottom="@dimen/ten_dp"
+        android:text="Select Practice"
+        android:textAlignment="center"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/eighteen_dp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:src="@mipmap/practice" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMultipalPracticeList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/ten_dp"
+        android:paddingBottom="@dimen/ten_dp"/>
+
+</LinearLayout>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/dialog_layout"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/twenty_dp"
+    android:paddingTop="@dimen/five_dp">
+
+    <EditText
+        android:id="@+id/edit_comment"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="@dimen/five_dp"
+        android:background="@drawable/border_light_grey"
+        android:gravity="top"
+        android:hint="Type another appointment slots" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/black_border_button"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:visibility="visible" />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="5dp" />
+
+        <Button
+            android:id="@+id/btn_report"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_button"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:visibility="visible" />
+
+    </LinearLayout><!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_cancel"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/button_retry"
+            android:gravity="center"
+            android:padding="@dimen/five_dp"
+            android:text="Cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/eighteen_dp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/txt_report"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/button_retry"
+            android:gravity="center"
+            android:padding="@dimen/five_dp"
+            android:text="Report"
+            android:textColor="@color/white"
+            android:textSize="@dimen/eighteen_dp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+    </LinearLayout>-->
+</LinearLayout>

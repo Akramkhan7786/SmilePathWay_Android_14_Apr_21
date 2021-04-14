@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "517599575499",
+    "firebase_url": "https://smilepathway-deep.firebaseio.com",
+    "project_id": "smilepathway-deep",
+    "storage_bucket": "smilepathway-deep.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517599575499:android:cc95b3918593674b8cca4e",
+        "android_client_info": {
+          "package_name": "app.smile.smilepathway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517599575499-fe931dc23p9mhd6qioek8lsv9ge8fnd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFiJ_B_z9bweUoueqJMto9APLej340pUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517599575499-fe931dc23p9mhd6qioek8lsv9ge8fnd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@mipmap/verification_bg"
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent" />
+
+    <TextView
+        android:id="@+id/tvLoginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/verification"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.19"
+        app:layout_constraintTop_toBottomOf="@id/tvLoginText" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@mipmap/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topGuideline" />
+
+
+    <TextView
+        android:id="@+id/tvHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/smilePathway"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.18" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.82"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeftNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRightNew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.90"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <EditText
+        android:id="@+id/edtPassword1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_verification_box"
+        android:gravity="center"
+        android:hint=""
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="@dimen/margin_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/edtPassword2"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeaderTitle" />
+
+
+    <EditText
+        android:id="@+id/edtPassword2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_verification_box"
+        android:gravity="center"
+        android:hint=""
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtPassword1"
+        app:layout_constraintLeft_toRightOf="@+id/edtPassword1"
+        app:layout_constraintRight_toLeftOf="@+id/edtPassword3"
+        app:layout_constraintTop_toTopOf="@+id/edtPassword1" />
+
+
+    <EditText
+        android:id="@+id/edtPassword3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_verification_box"
+        android:gravity="center"
+        android:hint=""
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtPassword1"
+        app:layout_constraintLeft_toRightOf="@+id/edtPassword2"
+        app:layout_constraintRight_toLeftOf="@+id/edtPassword31"
+        app:layout_constraintTop_toTopOf="@+id/edtPassword1" />
+    <EditText
+        android:id="@+id/edtPassword31"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_verification_box"
+        android:gravity="center"
+        android:hint=""
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtPassword1"
+        app:layout_constraintLeft_toRightOf="@+id/edtPassword3"
+        app:layout_constraintRight_toLeftOf="@+id/edtPassword32"
+        app:layout_constraintTop_toTopOf="@+id/edtPassword1" />
+    <EditText
+        android:id="@+id/edtPassword32"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_verification_box"
+        android:gravity="center"
+        android:hint=""
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:inputType="number"
+        android:maxLength="1"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtPassword1"
+        app:layout_constraintLeft_toRightOf="@+id/edtPassword31"
+        app:layout_constraintRight_toLeftOf="@+id/edtPassword4"
+        app:layout_constraintTop_toTopOf="@+id/edtPassword1" />
+
+
+    <EditText
+        android:id="@+id/edtPassword4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/border_verification_box"
+        android:gravity="center"
+        android:hint=""
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="1"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_marginRight="20dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtPassword1"
+        app:layout_constraintLeft_toRightOf="@+id/edtPassword3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edtPassword1" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"
+        app:layout_constraintTop_toBottomOf="@id/tvLoginText" />
+
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_button"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/endGuideline"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineLeftNew"
+        app:layout_constraintRight_toRightOf="@+id/guidelineRightNew"
+        app:layout_constraintTop_toTopOf="@+id/endGuideline" />
+
+    <TextView
+        android:id="@+id/tvForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="@string/forgot_password_new"
+        android:textColor="#574B57"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="@id/guidelineLeftNew"
+        app:layout_constraintRight_toRightOf="@+id/guidelineRightNew"
+        app:layout_constraintTop_toBottomOf="@+id/btnSubmit" />
+
+
+    <TextView
+        android:id="@+id/tvNeedHelp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
+        android:text="@string/need_help"
+        android:textColor="#839B9F"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
