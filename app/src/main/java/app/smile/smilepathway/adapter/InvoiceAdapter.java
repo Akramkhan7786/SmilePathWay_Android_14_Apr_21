@@ -60,17 +60,28 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
                 holder.tv_paid_status.setText(entity.getStatus());
                 holder.tv_amount.setTextColor(context.getResources().getColor(R.color.new_green));
                 holder.tv_paid_status.setTextColor(context.getResources().getColor(R.color.new_green));
+                holder.tv_paid_status.setVisibility(View.VISIBLE);
+            } else if (entity.getStatus().equalsIgnoreCase("Presented")){
+                holder.tv_paid_status.setVisibility(View.GONE);
             } else {
+                holder.tv_paid_status.setVisibility(View.VISIBLE);
                 holder.tv_paid_status.setText(entity.getStatus());
                 holder.tv_amount.setTextColor(context.getResources().getColor(R.color.red));
                 holder.tv_paid_status.setTextColor(context.getResources().getColor(R.color.red));
             }
 
-            if (entity.getDue_date() != null)
-                holder.tvDueDate.setText(entity.getDue_date());
-            if (entity.getPayment_date() != null)
-                holder.tvPaymentDate.setText(entity.getPayment_date());
+            if (entity.getInvoice_create_date() != null)
+                holder.tvInvoiceDate.setText(entity.getInvoice_create_date());
 
+                if (entity.getStatus().equalsIgnoreCase("Paid")) {
+                   // if (entity.getPayment_date() != null)
+                    holder.tv_dueDate_payment_date.setText("Payment Date");
+                    holder.tvPaymentDate.setText(entity.getPayment_date());
+                } else {
+                  //  if (entity.getDue_date() != null)
+                    holder.tv_dueDate_payment_date.setText("Due Date");
+                    holder.tvPaymentDate.setText(entity.getDue_date());
+                }
             holder.tv_view.setOnClickListener(view -> listner.itemOnClick(entity.getId()));
         }
 
@@ -100,7 +111,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvInvoiceNumber, tv_amount, tv_view, tv_paid_status, tvDueDate, tvPaymentDate;
+        TextView tvInvoiceNumber, tv_amount, tv_view, tv_paid_status, tvInvoiceDate, tvPaymentDate,tv_dueDate_payment_date;
         View view;
 
         public ViewHolder(View itemView) {
@@ -110,8 +121,9 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
             tv_amount = itemView.findViewById(R.id.tv_amount);
             tv_view = itemView.findViewById(R.id.tv_view);
             tv_paid_status = itemView.findViewById(R.id.tv_paid_status);
-            tvDueDate = itemView.findViewById(R.id.tvDueDate);
+            tvInvoiceDate = itemView.findViewById(R.id.tvInvoiceDate);
             tvPaymentDate = itemView.findViewById(R.id.tvPaymentDate);
+            tv_dueDate_payment_date = itemView.findViewById(R.id.tv_dueDate_payment_date);
         }
     }
 }  

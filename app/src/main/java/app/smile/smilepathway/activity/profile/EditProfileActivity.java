@@ -1,26 +1,13 @@
 package app.smile.smilepathway.activity.profile;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.NinePatch;
-import android.media.ExifInterface;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -29,11 +16,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.Guideline;
-import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -47,8 +32,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
-import java.util.Calendar;
 
 import app.smile.smilepathway.Dialog.ApiResultDialog;
 import app.smile.smilepathway.Interface.ConfirmationCallBack;
@@ -141,6 +124,14 @@ public class EditProfileActivity extends AppCompatActivity implements ResponseDe
     TextView notifyCountVenue;
     @BindView(R.id.fl_bell)
     FrameLayout flBell;
+    @BindView(R.id.header_logo)
+    ImageView headerLogo;
+    @BindView(R.id.tvUserName)
+    TextView tvUserName;
+    @BindView(R.id.edtUserName)
+    EditText edtUserName;
+    @BindView(R.id.viewUserName)
+    View viewUserName;
     private UserDataModel userResponse;
     private String isGender = "";
     private RequestedServiceDataModel requestedServiceDataModel;
@@ -182,6 +173,7 @@ public class EditProfileActivity extends AppCompatActivity implements ResponseDe
         edtFirstName.setText(userResponse.getFirstname());
         edtLastName.setText(userResponse.getLastname());
         edtMobileNumber.setText(userResponse.getMobile_number());
+        edtUserName.setText("SM-"+userResponse.getUsername());
         edtEmailId.setText(userResponse.getEmail());
         edtAge.setText(userResponse.getDob());
 
@@ -410,7 +402,7 @@ public class EditProfileActivity extends AppCompatActivity implements ResponseDe
                     Common.SetPreferences(this, "userData", new Gson().toJson(response.getResult().getUserdata()));
                     Intent intent = new Intent();
                     setResult(101, intent);
-                    new ApiResultDialog(this, "","Profile Successfully Updated", "OK", "", new ConfirmationCallBack() {
+                    new ApiResultDialog(this, "", "Profile Successfully Updated", "OK", "", new ConfirmationCallBack() {
                         @Override
                         public void onAccept() {
 

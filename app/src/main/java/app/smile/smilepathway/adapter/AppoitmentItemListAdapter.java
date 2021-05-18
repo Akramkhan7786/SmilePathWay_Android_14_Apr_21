@@ -51,7 +51,24 @@ public class AppoitmentItemListAdapter extends RecyclerView.Adapter<AppoitmentIt
             final ProceduresBean entity = data.get(position);
 
             holder.tvTitle.setText("Tooth #" + entity.getTooth_number());
-            holder.tv_Surface.setText("Surface #" + entity.getSurface());
+            if (entity.getSurface() != null) {
+                if (!entity.getSurface().equalsIgnoreCase("") && !entity.getSurface().equalsIgnoreCase("0")) {
+                    holder.tv_Surface.setText("Surface #" + entity.getSurface());
+                    holder.tv_Surface.setVisibility(View.VISIBLE);
+                } else {
+                    holder.tv_Surface.setVisibility(View.GONE);
+                }
+            } else {
+                holder.tv_Surface.setVisibility(View.GONE);
+            }
+
+            if (entity.getPrefix_suffix() != null) {
+                holder.tvPrefix_suffix.setVisibility(View.VISIBLE);
+                holder.tvPrefix_suffix.setText(entity.getPrefix_suffix());
+            } else {
+                holder.tvPrefix_suffix.setVisibility(View.GONE);
+            }
+
             holder.tvSubTitle.setText(entity.getShort_description());
             holder.tvCode.setText(entity.getCdt_code());
         }
@@ -79,7 +96,7 @@ public class AppoitmentItemListAdapter extends RecyclerView.Adapter<AppoitmentIt
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvSubTitle, tvTitle,tv_Surface, tvCode;
+        TextView tvSubTitle, tvTitle, tv_Surface, tvCode,tvPrefix_suffix;
         View view;
 
         public ViewHolder(View itemView) {
@@ -89,6 +106,7 @@ public class AppoitmentItemListAdapter extends RecyclerView.Adapter<AppoitmentIt
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvSubTitle = itemView.findViewById(R.id.tvSubTitle);
             tvCode = itemView.findViewById(R.id.tvCode);
+            tvPrefix_suffix = itemView.findViewById(R.id.tvPrefix_suffix);
 
         }
     }

@@ -243,6 +243,16 @@ public class InvoiceViewModel {
             private String id;
             private String invoice_number;
             private String due_date;
+            private String invoice_create_date;
+
+            public String getInvoice_create_date() {
+                return invoice_create_date;
+            }
+
+            public void setInvoice_create_date(String invoice_create_date) {
+                this.invoice_create_date = invoice_create_date;
+            }
+
             private String status;
             private String payment_mode;
             private Object payment_mode_description;

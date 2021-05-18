@@ -126,12 +126,23 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvFirstNameLastName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:textColor="#EF936E"
+                        android:textSize="16sp"
+                        app:layout_constraintLeft_toRightOf="@id/ivUser"
+                        app:layout_constraintTop_toTopOf="@+id/ivUser" />
+
+                    <TextView
                         android:id="@+id/tvUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:textColor="#EF936E"
-                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="16sp"
                         app:layout_constraintLeft_toRightOf="@id/ivUser"
                         app:layout_constraintTop_toTopOf="@+id/ivUser" />
 
@@ -143,7 +154,7 @@
                         android:maxLines="1"
                         android:singleLine="true"
                         android:textColor="#839B9F"
-                        android:textSize="15sp"
+                        android:textSize="14sp"
                         app:layout_constraintLeft_toLeftOf="@+id/tvUserName"
                         app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
@@ -246,55 +257,6 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cvAppointment"
-                    android:layout_width="140dp"
-                    android:layout_height="160dp"
-                    android:layout_marginLeft="@dimen/ten_dp"
-                    android:layout_marginRight="@dimen/ten_dp"
-                    android:elevation="8dp"
-                    app:cardCornerRadius="10dp"
-                    app:cardElevation="8dp">
-
-                    <LinearLayout
-                        android:id="@+id/constantAppointment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/ivAppointment"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:src="@mipmap/ic_appointment" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:text="@string/smile_appo"
-                            android:textColor="#839B9F"
-                            android:textSize="18dp" />
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <androidx.cardview.widget.CardView
                     android:id="@+id/cvTreatmentPlan"
                     android:layout_width="140dp"
                     android:layout_height="160dp"
@@ -334,6 +296,53 @@
 
                 </androidx.cardview.widget.CardView>
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvAppointment"
+                    android:layout_width="140dp"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="@dimen/ten_dp"
+                    android:layout_marginRight="@dimen/ten_dp"
+                    android:elevation="8dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/constantAppointment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ivAppointment"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@mipmap/ic_appointment" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="@string/smile_appo"
+                            android:textColor="#839B9F"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvSmileVerify"

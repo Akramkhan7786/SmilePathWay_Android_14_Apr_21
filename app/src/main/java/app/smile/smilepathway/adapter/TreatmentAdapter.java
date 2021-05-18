@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -52,16 +53,36 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (getItemViewType(position) == VIEW_TYPE_NORMAL) {
             final SmilePlanModel.ResultBean entity = data.get(position);
+            holder.tvTitle.setText(entity.getTp_heading());
+            /*holder.tvSubTitle.setText(entity.getTp_heading());
+            holder.tvDateTime.setText(entity.getTp_date());*/
+            /*lightgrey_border_button*/
+            if (entity.getIs_selected().equalsIgnoreCase("0")) {
+                holder.btn_view.setBackgroundResource(R.drawable.darkgrey_border_button);
+                holder.btn_appointer.setBackgroundResource(R.drawable.darkgrey_border_button);
+                holder.img_right_tick.setVisibility(View.GONE);
+            } else {
+                holder.img_right_tick.setVisibility(View.VISIBLE);
+                holder.btn_view.setBackgroundResource(R.drawable.border_button);
+                holder.btn_appointer.setBackgroundResource(R.drawable.new_black_border_button);
+            }
 
-            holder.tvSubTitle.setText(entity.getTp_heading());
-            holder.tvDateTime.setText(entity.getTp_date());
-            holder.btn_appointer.setOnClickListener(v -> listner.onClickAppointer(position));
-            holder.btn_view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                        listner.onClickView(position);
-                }
-            });
+                holder.btn_appointer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (entity.getIs_selected().equalsIgnoreCase("1")) {
+                            listner.onClickAppointer(position);
+                        }
+                    }
+                });
+                holder.btn_view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (entity.getIs_selected().equalsIgnoreCase("1")) {
+                            listner.onClickView(position);
+                        }
+                    }
+                });
         } else {
             holder.txt_hint_msg.setText("NO PATHWAY FOUND");
         }
@@ -95,14 +116,16 @@ public class TreatmentAdapter extends RecyclerView.Adapter<TreatmentAdapter.View
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView tvSubTitle, tvDateTime;
+        ImageView img_right_tick;
+        TextView tvTitle,tvSubTitle, tvDateTime;
         View view;
         LinearLayout btn_appointer, btn_view;
         TextView txt_hint_msg;
         public ViewHolder(View itemView) {
             super(itemView);
             view = itemView;
+            img_right_tick = itemView.findViewById(R.id.img_right_tick);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
             tvSubTitle = itemView.findViewById(R.id.tvSubTitle);
             tvDateTime = itemView.findViewById(R.id.tvDateTime);
             btn_appointer = itemView.findViewById(R.id.btn_appointer);

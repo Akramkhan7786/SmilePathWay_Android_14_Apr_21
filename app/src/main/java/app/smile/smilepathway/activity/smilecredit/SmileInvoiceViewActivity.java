@@ -77,6 +77,10 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
     RecyclerView rvInvoiceList;
     @BindView(R.id.clMainContent)
     LinearLayout clMainContent;
+    @BindView(R.id.tvInvoiceDate)
+    TextView tvInvoiceDate;
+    @BindView(R.id.tvPaymentDate)
+    TextView tvPaymentDate;
     private RequestedServiceDataModel requestedServiceDataModel;
     private BaseRequestData baseRequestData;
     private String invoiceId = "";
@@ -189,18 +193,35 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
         invoiceHeader.setVisibility(View.VISIBLE);
         txtPracticeName.setText(invoiceViewModel.getResult().getPractice_details().getPractice_name());
         txtPracticeAddress.setText(invoiceViewModel.getResult().getPractice_details().getPractice_address());
-        txtPracticeStateCityPincode.setText(invoiceViewModel.getResult().getPractice_details().getPractice_state()+", "
-        +invoiceViewModel.getResult().getPractice_details().getPractice_city()+", "
-                        +invoiceViewModel.getResult().getPractice_details().getPractice_pincode());
+        if (!invoiceViewModel.getResult().getPractice_details().getPractice_state().equalsIgnoreCase("") && invoiceViewModel.getResult().getPractice_details().getPractice_state() != null &&
+                !invoiceViewModel.getResult().getPractice_details().getPractice_city().equalsIgnoreCase("") && invoiceViewModel.getResult().getPractice_details().getPractice_city() != null &&
+                !invoiceViewModel.getResult().getPractice_details().getPractice_pincode().equalsIgnoreCase("") && invoiceViewModel.getResult().getPractice_details().getPractice_pincode() != null) {
+            txtPracticeStateCityPincode.setVisibility(View.VISIBLE);
+            txtPracticeStateCityPincode.setText(invoiceViewModel.getResult().getPractice_details().getPractice_state() + ", "
+                    + invoiceViewModel.getResult().getPractice_details().getPractice_city() + ", "
+                    + invoiceViewModel.getResult().getPractice_details().getPractice_pincode());
+        } else {
+            txtPracticeStateCityPincode.setVisibility(View.GONE);
+        }
+
 
         txtPatientName.setText(invoiceViewModel.getResult().getPatient_details().getName());
         txtPatientAddress.setText(invoiceViewModel.getResult().getPatient_details().getAddress());
-        txtPatientStateCityPincode.setText(invoiceViewModel.getResult().getPatient_details().getState()+", "
-                +invoiceViewModel.getResult().getPatient_details().getCity()+", "
-                +invoiceViewModel.getResult().getPatient_details().getZipcode());
+
+        if (!invoiceViewModel.getResult().getPatient_details().getState().equalsIgnoreCase("") && invoiceViewModel.getResult().getPatient_details().getState() != null &&
+                !invoiceViewModel.getResult().getPatient_details().getCity().equalsIgnoreCase("") && invoiceViewModel.getResult().getPatient_details().getCity() != null &&
+                !invoiceViewModel.getResult().getPatient_details().getZipcode().equalsIgnoreCase("") && invoiceViewModel.getResult().getPatient_details().getZipcode() != null) {
+            txtPatientStateCityPincode.setVisibility(View.VISIBLE);
+            txtPatientStateCityPincode.setText(invoiceViewModel.getResult().getPatient_details().getState() + ", " + invoiceViewModel.getResult().getPatient_details().getCity() + ", " + invoiceViewModel.getResult().getPatient_details().getZipcode());
+        } else {
+            txtPatientStateCityPincode.setVisibility(View.GONE);
+        }
 
         tvInvoiceNumber.setText(invoiceViewModel.getResult().getInvoice().getInvoice_number());
         tvDueDate.setText(invoiceViewModel.getResult().getInvoice().getDue_date());
+        tvPaymentDate.setText(invoiceViewModel.getResult().getInvoice().getPayment_date());
+        tvInvoiceDate.setText(invoiceViewModel.getResult().getInvoice().getInvoice_create_date());
+
         tvAmount.setText("$" + invoiceViewModel.getResult().getInvoice().getGross_amount());
         if (invoiceViewModel.getResult().getInvoice().getStatus().equalsIgnoreCase("Presented")) {
             tvPay.setText("PAY");

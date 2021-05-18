@@ -57,13 +57,14 @@ public class SmilePlanListAdapter extends RecyclerView.Adapter<SmilePlanListAdap
 
             holder.tvAppoitment.setText("Appointment #" + entity.getAppointment_number());
             holder.tvTimeDuration.setText(entity.getAppointment_time() + " min");
-            if (entity.getAppointment_status().equalsIgnoreCase("1")) {
+            holder.tvSchduleTime.setText(entity.getSchedule_date_time());
+        /*    if (entity.getAppointment_status().equalsIgnoreCase("1")) {
                 holder.tvSchduleTime.setText("Requested " + entity.getSchedule_date());
             } else if (entity.getAppointment_status().equalsIgnoreCase("0")) {
                 holder.tvSchduleTime.setText("unschedule ");
             } else {
                 holder.tvSchduleTime.setText("schedule " + entity.getSchedule_date());
-            }
+            }*/
             holder.tvAmount.setText("$" + entity.getAppointment_amount());
             holder.tvAmount.setOnClickListener(view -> listner.onClickPrice(position));
 

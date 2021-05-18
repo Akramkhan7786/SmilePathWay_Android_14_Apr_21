@@ -36,6 +36,16 @@ public class AppointmentsArrBean {
     private String stop_time;
     private String is_locked;
     private String appointment_amount;
+    private String schedule_date_time;
+
+    public String getSchedule_date_time() {
+        return schedule_date_time;
+    }
+
+    public void setSchedule_date_time(String schedule_date_time) {
+        this.schedule_date_time = schedule_date_time;
+    }
+
     private List<ProceduresBean> procedures;
 
     public String getAppointment_source() {

@@ -51,6 +51,7 @@
     <string name="_022_0123456789">022 0123456789</string>
     <string name="email">Email</string>
     <string name="username">User ID</string>
+    <string name="user_name">User Name</string>
     <string name="username_emai">User ID/Email ID</string>
     <string name="see_favorite_properties">See Favorite Properties</string>
     <string name="you_can_edit_your_personal_details">You can edit your personal details</string>

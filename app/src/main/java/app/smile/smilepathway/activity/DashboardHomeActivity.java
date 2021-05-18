@@ -74,6 +74,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements Response
     CircleImageView ivUser;
     @BindView(R.id.tvUserName)
     TextView tvUserName;
+    @BindView(R.id.tvFirstNameLastName)
+    TextView tvFirstNameLastName;
     @BindView(R.id.tvUserEmail)
     TextView tvUserEmail;
     @BindView(R.id.ivEditProfile)
@@ -165,7 +167,8 @@ public class DashboardHomeActivity extends AppCompatActivity implements Response
                             .apply(new RequestOptions().placeholder(R.drawable.usertopbar).error(R.drawable.usertopbar))
                             .into(ivUser);
                 }
-                tvUserName.setText(userResponse.getFirstname() + " " + userResponse.getLastname());
+                tvFirstNameLastName.setText(userResponse.getFirstname() + " " + userResponse.getLastname());
+                tvUserName.setText("SM-" +userResponse.getUsername());
                 tvUserEmail.setText(userResponse.getEmail());
             }
         } catch (Exception e) {

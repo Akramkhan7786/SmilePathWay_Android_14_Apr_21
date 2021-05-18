@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import app.smile.smilepathway.R;
+import app.smile.smilepathway.activity.DashboardHomeActivity;
 import app.smile.smilepathway.apirequest.ApiClass;
 import app.smile.smilepathway.apirequest.BaseRequestData;
 import app.smile.smilepathway.apirequest.Common;
@@ -27,6 +28,7 @@ import app.smile.smilepathway.apirequest.RequestedServiceDataModel;
 import app.smile.smilepathway.apirequest.ResponseDelegate;
 import app.smile.smilepathway.apirequest.ResponseType;
 import app.smile.smilepathway.model.ErrorModel;
+import app.smile.smilepathway.model.LoginModel;
 import app.smile.smilepathway.utils.AlertDialogUtil;
 import app.smile.smilepathway.utils.Utils;
 import butterknife.BindView;
@@ -81,6 +83,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements Respons
     private String userId = "";
     private Intent intent;
     private JSONObject object = new JSONObject();
+    private LoginModel userResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,8 +221,15 @@ public class ChangePasswordActivity extends AppCompatActivity implements Respons
                 try {
                     object = new JSONObject(jsondata);
                     if (screenType.equalsIgnoreCase("reSetPassword")) {
-                        Utils.showInfoMsg(this, object.getString("result"));
-                        intent = new Intent(this, LoginActivity.class);
+//                        Utils.showInfoMsg(this, object.getString("result"));
+//                        intent = new Intent(this, LoginActivity.class);
+//                        startActivity(intent);
+//                        finishAffinity();
+                        userResponse = new Gson().fromJson(jsondata, LoginModel.class);
+                        Common.SetChatDeatils(this, ApiClass.CHAT_DATA,  new Gson().toJson(userResponse.getResult().getChat_details()));
+                        Common.SetPreferences(this, "userData", new Gson().toJson(userResponse.getResult().getUserdata()));
+                        Common.SetPreferencesToken(this, ApiClass.TOKEN, userResponse.getResult().getToken());
+                        intent = new Intent(ChangePasswordActivity.this, DashboardHomeActivity.class);
                         startActivity(intent);
                         finishAffinity();
                     } else {

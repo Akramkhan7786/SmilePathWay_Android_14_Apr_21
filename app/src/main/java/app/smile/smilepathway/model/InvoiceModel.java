@@ -70,6 +70,16 @@ public class InvoiceModel {
         private String payment_mode;
         private String payment_mode_description;
         private String payment_date;
+        private String invoice_create_date;
+
+        public String getInvoice_create_date() {
+            return invoice_create_date;
+        }
+
+        public void setInvoice_create_date(String invoice_create_date) {
+            this.invoice_create_date = invoice_create_date;
+        }
+
         private String gross_amount;
 
         public String getId() {
