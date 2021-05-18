@@ -109,7 +109,7 @@
                 android:shape="ring"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="10dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -266,7 +266,7 @@
                                     android:layout_weight="1"
                                     android:gravity="right"
                                     android:paddingRight="@dimen/five_dp"
-                                    android:text="Due Date"
+                                    android:text="Invoice Date"
                                     android:textColor="@color/white"
                                     android:textStyle="bold"
                                     android:textSize="16sp"
@@ -274,7 +274,7 @@
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
-                                    android:id="@+id/tvDueDate"
+                                    android:id="@+id/tvInvoiceDate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -346,7 +346,7 @@
                                     android:layout_weight="1"
                                     android:gravity="right"
                                     android:paddingRight="@dimen/five_dp"
-                                    android:text="Invoice Date"
+                                    android:text="Due Date"
                                     android:textColor="@color/white"
                                     android:textStyle="bold"
                                     android:textSize="16sp"
@@ -354,7 +354,7 @@
                                     app:layout_constraintTop_toTopOf="parent" />
 
                                 <TextView
-                                    android:id="@+id/tvInvoiceDate"
+                                    android:id="@+id/tvDueDate"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
