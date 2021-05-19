@@ -109,7 +109,7 @@
                 android:shape="ring"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="10dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -245,7 +245,6 @@
                                     android:maxLines="1"
                                     android:paddingLeft="@dimen/five_dp"
                                     android:singleLine="true"
-                                    android:text="GS 00000014"
                                     android:textAllCaps="true"
                                     android:textColor="@color/white"
                                     android:textSize="14sp"
@@ -282,7 +281,6 @@
                                     android:maxLines="1"
                                     android:paddingRight="@dimen/five_dp"
                                     android:singleLine="true"
-                                    android:text="Dec 12, 2017"
                                     android:textAllCaps="true"
                                     android:textColor="@color/white"
                                     android:textSize="14sp"
@@ -325,7 +323,6 @@
                                     android:maxLines="1"
                                     android:paddingLeft="@dimen/five_dp"
                                     android:singleLine="true"
-                                    android:text="Dec 12, 2017"
                                     android:textAllCaps="true"
                                     android:textColor="@color/white"
                                     android:textSize="14sp"
@@ -362,7 +359,6 @@
                                     android:maxLines="1"
                                     android:paddingRight="@dimen/five_dp"
                                     android:singleLine="true"
-                                    android:text="Dec 12, 2017"
                                     android:textAllCaps="true"
                                     android:textColor="@color/white"
                                     android:textSize="14sp"
