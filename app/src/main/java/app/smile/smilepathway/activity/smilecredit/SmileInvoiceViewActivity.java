@@ -81,6 +81,8 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
     TextView tvInvoiceDate;
     @BindView(R.id.tvPaymentDate)
     TextView tvPaymentDate;
+    @BindView(R.id.img_right_tick)
+    ImageView imgRightTick;
     private RequestedServiceDataModel requestedServiceDataModel;
     private BaseRequestData baseRequestData;
     private String invoiceId = "";
@@ -225,10 +227,13 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
         tvAmount.setText("$" + invoiceViewModel.getResult().getInvoice().getGross_amount());
         if (invoiceViewModel.getResult().getInvoice().getStatus().equalsIgnoreCase("Presented")) {
             tvPay.setText("PAY");
+            imgRightTick.setVisibility(View.GONE);
         } else if (invoiceViewModel.getResult().getInvoice().getStatus().equalsIgnoreCase("Paid")) {
             tvPay.setText("PAID");
+            imgRightTick.setVisibility(View.VISIBLE);
         } else {
             tvPay.setText("Canceled");
+            imgRightTick.setVisibility(View.GONE);
         }
     }
 

@@ -83,9 +83,9 @@ public class EstimatorAdapter extends RecyclerView.Adapter<EstimatorAdapter.View
                 holder.tvInsuFee.setText("$ " + "0");
             }
             if (entity.getInsurance_coverage() != null) {
-                holder.tvInsuCover.setText("$ " + entity.getInsurance_coverage());
+                holder.tvInsuCover.setText(entity.getInsurance_coverage()+ " %" );
             } else {
-                holder.tvInsuCover.setText("$ " + "0");
+                holder.tvInsuCover.setText("0"+ " %");
             }
             if (entity.getInsurance_coverage_amount() != null) {
                 holder.tvEstimateInsurPayment.setText("$ " + entity.getInsurance_coverage_amount());

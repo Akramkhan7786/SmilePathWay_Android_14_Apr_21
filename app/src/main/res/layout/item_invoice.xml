@@ -44,7 +44,7 @@
                 android:maxLines="1"
                 android:singleLine="true"
                 android:text="$2500"
-                android:textColor="@color/new_green"
+                android:textColor="@color/selector"
                 android:textSize="@dimen/margin_20"
                 android:textStyle="bold"
                 app:layout_constraintRight_toRightOf="@+id/tvCode"

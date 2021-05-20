@@ -58,7 +58,6 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
                 holder.tv_amount.setText("$" + entity.getGross_amount());
             if (entity.getStatus().equalsIgnoreCase("Paid")) {
                 holder.tv_paid_status.setText(entity.getStatus());
-                holder.tv_amount.setTextColor(context.getResources().getColor(R.color.new_green));
                 holder.tv_paid_status.setTextColor(context.getResources().getColor(R.color.new_green));
                 holder.tv_paid_status.setVisibility(View.VISIBLE);
             } else if (entity.getStatus().equalsIgnoreCase("Presented")){
@@ -66,7 +65,6 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
             } else {
                 holder.tv_paid_status.setVisibility(View.VISIBLE);
                 holder.tv_paid_status.setText(entity.getStatus());
-                holder.tv_amount.setTextColor(context.getResources().getColor(R.color.red));
                 holder.tv_paid_status.setTextColor(context.getResources().getColor(R.color.red));
             }
 
