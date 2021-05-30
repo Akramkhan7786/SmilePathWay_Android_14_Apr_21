@@ -109,7 +109,7 @@
                 android:shape="ring"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="10dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
@@ -542,8 +542,8 @@
                                 android:src="@mipmap/righ"
                                 android:layout_marginLeft="@dimen/five_dp"
                                 android:visibility="gone"/>
-                            <TextView
-                                android:id="@+id/tvPay"
+                            <Button
+                                android:id="@+id/payButton"
                                 android:layout_width="match_parent"
                                 android:layout_height="40dp"
                                 android:layout_gravity="center"

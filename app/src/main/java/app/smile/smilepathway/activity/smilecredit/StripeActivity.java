@@ -84,12 +84,12 @@ public class StripeActivity extends AppCompatActivity implements ResponseDelegat
     private Stripe stripe;
     private String client_secret = "";
     private String stripeAccountId = "";
+    public static String invoiceId = "";
     private OkHttpClient httpClient = new OkHttpClient();
     private int notifiTotalCount = 0;
     private static RequestedServiceDataModel requestedServiceDataModel;
     public static String intentId = "";
     public static String paymentStatus = "";
-    public static String invoiceId = "";
     private ProgressDialog pageProgressDialog;
 
     @Override
@@ -148,6 +148,7 @@ public class StripeActivity extends AppCompatActivity implements ResponseDelegat
             //Log.e(this.toString(), e + " Do nothing because when user rapidly change");
         }
     }
+
     private void startCheckout() {
         btnSubmit.setOnClickListener((View view) -> {
             showProgressDialog();

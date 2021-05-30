@@ -57,6 +57,33 @@ public class ClientSecertModel {
 
         private String invoice_id;
         private String client_secret;
+        private String customerid;
+        private String ephemeralKeySecret;
+        private String payment_intent_id;
+
+        public String getCustomerid() {
+            return customerid;
+        }
+
+        public void setCustomerid(String customerid) {
+            this.customerid = customerid;
+        }
+
+        public String getEphemeralKeySecret() {
+            return ephemeralKeySecret;
+        }
+
+        public void setEphemeralKeySecret(String ephemeralKeySecret) {
+            this.ephemeralKeySecret = ephemeralKeySecret;
+        }
+
+        public String getPayment_intent_id() {
+            return payment_intent_id;
+        }
+
+        public void setPayment_intent_id(String payment_intent_id) {
+            this.payment_intent_id = payment_intent_id;
+        }
 
         public String getInvoice_id() {
             return invoice_id;

@@ -2,11 +2,14 @@ package app.smile.smilepathway.activity.smilecredit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -14,11 +17,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.stripe.android.PaymentConfiguration;
+import com.stripe.android.paymentsheet.PaymentResult;
+import com.stripe.android.paymentsheet.PaymentSheet;
+import com.stripe.android.paymentsheet.PaymentSheetResultCallback;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
+import app.smile.smilepathway.Dialog.ApiResultDialog;
+import app.smile.smilepathway.Interface.ConfirmationCallBack;
 import app.smile.smilepathway.R;
+import app.smile.smilepathway.activity.DashboardHomeActivity;
 import app.smile.smilepathway.adapter.InvoiceViewAdapter;
 import app.smile.smilepathway.apirequest.ApiClass;
 import app.smile.smilepathway.apirequest.BaseRequestData;
@@ -30,15 +43,29 @@ import app.smile.smilepathway.apirequest.ResponseType;
 import app.smile.smilepathway.model.ClientSecertModel;
 import app.smile.smilepathway.model.ErrorModel;
 import app.smile.smilepathway.model.InvoiceViewModel;
+import app.smile.smilepathway.model.stripePaymentSuccessModel;
 import app.smile.smilepathway.utils.AlertDialogUtil;
 import app.smile.smilepathway.utils.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SmileInvoiceViewActivity extends AppCompatActivity implements ResponseDelegate {
-
-
+    private PaymentSheet paymentSheet;
+    private String paymentIntentClientSecret;
+    private String customerId;
+    private String ephemeralKeySecret;
+    private String invoiceId;
+    private String payment_intent_id;
+    private boolean isPay = false;
     @BindView(R.id.header_logo)
     ImageView headerLogo;
     @BindView(R.id.tvInvoiceView)
@@ -69,8 +96,8 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
     TextView tvDueDate;
     @BindView(R.id.tv_amount)
     TextView tvAmount;
-    @BindView(R.id.tvPay)
-    TextView tvPay;
+    @BindView(R.id.payButton)
+    Button payButton;
     @BindView(R.id.invoiceHeader)
     CardView invoiceHeader;
     @BindView(R.id.rvInvoiceList)
@@ -85,7 +112,6 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
     ImageView imgRightTick;
     private RequestedServiceDataModel requestedServiceDataModel;
     private BaseRequestData baseRequestData;
-    private String invoiceId = "";
     private InvoiceViewModel invoiceViewModel;
     private int notifiTotalCount = 0;
 
@@ -105,6 +131,7 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
             invoiceId = getIntent().getStringExtra("invoice_id");
             smilePointsGet(invoiceId);
         }
+        stripePaymentMethad();
     }
 
 
@@ -135,20 +162,23 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
     }
 
 
-    @OnClick({R.id.ivBack, R.id.tvPay, R.id.ivNotification})
+    @OnClick({R.id.ivBack, R.id.ivNotification, R.id.payButton})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ivBack:
-                finish();
-                break;
-            case R.id.tvPay:
-                if (tvPay.getText().toString().trim().equalsIgnoreCase("PAY")) {
-                    //api call create stripe id in backend server
-                    creationPaymentBackend();
+                if (isPay) {
+                    paymentCancel();
+                } else {
+                    finish();
                 }
                 break;
             case R.id.ivNotification:
                 Utils.notificationRedirect(this);
+                break;
+            case R.id.payButton:
+                if (isPay) {
+                    presentPaymentSheet();
+                }
                 break;
         }
     }
@@ -176,15 +206,46 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
                 try {
                     ClientSecertModel secertModel = new Gson().fromJson(jsondata, ClientSecertModel.class);
                     if (secertModel.getCode() == 200) {
-                        // integration for stripe payment gatway
-                        // Intent intent = new Intent(this, PaymentActivity.class);
-                        Intent intent = new Intent(this, StripeActivity.class);
-                        intent.putExtra("stripe_accountid", invoiceViewModel.getResult().getPractice_details().getPractice_stripe_id());
-                        intent.putExtra("invoice_id", invoiceId);
-                        intent.putExtra("client_secret", secertModel.getResult().getClient_secret());
-                        startActivity(intent);
+                        invoiceId = secertModel.getResult().getInvoice_id();
+                        payment_intent_id = secertModel.getResult().getPayment_intent_id();
+
+                        // need for stripe payment gatway this key
+                        paymentIntentClientSecret = secertModel.getResult().getClient_secret();
+                        customerId = secertModel.getResult().getCustomerid();
+                        ephemeralKeySecret = secertModel.getResult().getEphemeralKeySecret();
+
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case ResponseType.PAYMENTSUCCESS:
+                try {
+                    stripePaymentSuccessModel stripeModel = new Gson().fromJson(jsondata, stripePaymentSuccessModel.class);
+                    if (stripeModel.getCode() == 200) {
+                        new ApiResultDialog(this, "", stripeModel.getResult().getMessage(), "OK", "", new ConfirmationCallBack() {
+                            @Override
+                            public void onAccept() {
+                            }
+                            @Override
+                            public void onDecline() {
+                                finish();
+                                Intent intent = new Intent(SmileInvoiceViewActivity.this, DashboardHomeActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                        }).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case ResponseType.PAYMENTCANCEL:
+                try {
+                    finish();
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
@@ -226,17 +287,22 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
 
         tvAmount.setText("$" + invoiceViewModel.getResult().getInvoice().getGross_amount());
         if (invoiceViewModel.getResult().getInvoice().getStatus().equalsIgnoreCase("Presented")) {
-            tvPay.setText("PAY");
+            payButton.setText("PAY");
             imgRightTick.setVisibility(View.GONE);
+            isPay = true;
+            if (isPay) {
+                creationPaymentBackend();
+            }
         } else if (invoiceViewModel.getResult().getInvoice().getStatus().equalsIgnoreCase("Paid")) {
-            tvPay.setText("PAID");
+            payButton.setText("PAID");
             imgRightTick.setVisibility(View.VISIBLE);
+            isPay = false;
         } else {
-            tvPay.setText("Canceled");
+            payButton.setText("Canceled");
             imgRightTick.setVisibility(View.GONE);
+            isPay = false;
         }
     }
-
 
     @Override
     public void onFailure(String jsondata, String message, BaseRequestData baseRequestData) {
@@ -253,7 +319,6 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
         }
     }
 
-
     private void setupAdapter(InvoiceViewModel invoiceViewModel) {
         InvoiceViewAdapter adapter = new InvoiceViewAdapter(this, invoiceViewModel.getResult().getInvoice_details());
         rvInvoiceList.setHasFixedSize(true);
@@ -262,5 +327,95 @@ public class SmileInvoiceViewActivity extends AppCompatActivity implements Respo
         rvInvoiceList.setAdapter(adapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (isPay) {
+            paymentCancel();
+        } else {
+            finish();
+        }
+    }
 
+    /*-------------------------------------------------Stripe CheckOut Activity-------------------------------------------------------------*/
+    public void paymentSuccess(String status) {
+        requestedServiceDataModel = new RequestedServiceDataModel(this, this);
+        BaseRequestData baseRequestData = new BaseRequestData();
+        baseRequestData.setTag(ResponseType.PAYMENTSUCCESS);
+        baseRequestData.setServiceType(Constant.SERVICE_TYPE_POST);
+        requestedServiceDataModel.putQurry(ApiClass.getmApiClass().INVOICE_ID, invoiceId);
+        requestedServiceDataModel.putQurry(ApiClass.getmApiClass().STRIPE_PAYMENT_INTENT_ID, payment_intent_id);
+        requestedServiceDataModel.putQurry(ApiClass.getmApiClass().STRIPE_STATUS, status);
+        baseRequestData.setSmileApi(Constant.SMILE_API);
+        baseRequestData.setApiType("invoice_payment");
+        requestedServiceDataModel.setBaseRequestData(baseRequestData);
+        requestedServiceDataModel.execute();
+    }
+
+    public void paymentCancel() {
+        requestedServiceDataModel = new RequestedServiceDataModel(this, this);
+        BaseRequestData baseRequestData = new BaseRequestData();
+        baseRequestData.setTag(ResponseType.PAYMENTCANCEL);
+        baseRequestData.setServiceType(Constant.SERVICE_TYPE_POST);
+        requestedServiceDataModel.putQurry(ApiClass.getmApiClass().INVOICE_ID, invoiceId);
+        baseRequestData.setSmileApi(Constant.SMILE_API);
+        baseRequestData.setApiType("cancel_invoice_payment");
+        requestedServiceDataModel.setBaseRequestData(baseRequestData);
+        requestedServiceDataModel.execute();
+    }
+
+    private void stripePaymentMethad() {
+        PaymentConfiguration.init(this, Constant.STRIP_PAYMENT_KEY);
+        paymentSheet = new PaymentSheet(this, result -> SmileInvoiceViewActivity.this.onPaymentSheetResult(result));
+    }
+
+    private void presentPaymentSheet() {
+        paymentSheet.present$stripe_release(
+                paymentIntentClientSecret,
+                new PaymentSheet.Configuration(
+                        "Example, Inc.",
+                        new PaymentSheet.CustomerConfiguration(
+                                customerId,
+                                ephemeralKeySecret
+                        )
+                )
+        );
+
+    }
+
+    private void onPaymentSheetResult(final PaymentResult paymentSheetResult) {
+        if (paymentSheetResult instanceof PaymentResult.Canceled) {
+            Toast.makeText(
+                    this,
+                    "Payment Canceled",
+                    Toast.LENGTH_LONG
+            ).show();
+        } else if (paymentSheetResult instanceof PaymentResult.Failed) {
+            Toast.makeText(
+                    this,
+                    "Payment Failed. See logcat for details.",
+                    Toast.LENGTH_LONG
+            ).show();
+            Log.e("App", "Got error: ", ((PaymentResult.Failed) paymentSheetResult).getError());
+            callbackMethad("Your transaction has been declined!");
+        } else if (paymentSheetResult instanceof PaymentResult.Completed) {
+            String status = String.valueOf(((PaymentResult.Completed) paymentSheetResult).getPaymentIntent().getStatus());
+            paymentSuccess(status);
+        }
+    }
+
+    public void callbackMethad(String msg) {
+        new ApiResultDialog(this, "Got error!", msg, "OK", "", new ConfirmationCallBack() {
+            @Override
+            public void onAccept() {
+            }
+
+            @Override
+            public void onDecline() {
+                finish();
+            }
+        }).show();
+
+    }
+
+    /*-------------------------------------------------Stripe CheckOut Activity-------------------------------------------------------------*/
 }

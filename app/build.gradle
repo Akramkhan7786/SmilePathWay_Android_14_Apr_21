@@ -110,6 +110,7 @@ dependencies {
     // Stripe Android SDK
     implementation 'com.stripe:stripe-android:16.4.0'
 
+
     // AndroidX Browser library
     implementation 'androidx.browser:browser:1.2.0'
 

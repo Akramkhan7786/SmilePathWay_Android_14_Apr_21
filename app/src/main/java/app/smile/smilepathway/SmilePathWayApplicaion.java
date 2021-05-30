@@ -73,6 +73,7 @@ public class SmilePathWayApplicaion extends MultiDexApplication {
                 getApplicationContext(),
                 Constant.STRIP_PAYMENT_KEY
         );
+
     }
 
     @Override

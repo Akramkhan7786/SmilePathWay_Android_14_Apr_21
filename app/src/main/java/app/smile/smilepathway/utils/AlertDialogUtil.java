@@ -109,6 +109,9 @@ public class AlertDialogUtil {
             tittle.setText(title);
             tittle.setVisibility(View.VISIBLE);
         }
+        submit.setVisibility(View.GONE);
+        view.setVisibility(View.GONE);
+
         message.setText(msg);
         textok.setOnClickListener(new View.OnClickListener() {
             @Override

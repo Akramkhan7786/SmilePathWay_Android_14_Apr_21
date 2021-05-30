@@ -246,6 +246,8 @@ public class ApiResult {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             context.finishAffinity();
+        } else {
+            AlertDialogUtil.showCustomDialog(context, "SmilePathway", "oops something went wrong, please try again.");
         }
     }
 
