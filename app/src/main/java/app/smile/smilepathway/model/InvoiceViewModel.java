@@ -255,9 +255,9 @@ public class InvoiceViewModel {
 
             private String status;
             private String payment_mode;
-            private Object payment_mode_description;
+            private String payment_mode_description;
             private String payment_date;
-            private int gross_amount;
+            private String gross_amount;
 
             public String getId() {
                 return id;
@@ -299,11 +299,11 @@ public class InvoiceViewModel {
                 this.payment_mode = payment_mode;
             }
 
-            public Object getPayment_mode_description() {
+            public String getPayment_mode_description() {
                 return payment_mode_description;
             }
 
-            public void setPayment_mode_description(Object payment_mode_description) {
+            public void setPayment_mode_description(String payment_mode_description) {
                 this.payment_mode_description = payment_mode_description;
             }
 
@@ -315,11 +315,11 @@ public class InvoiceViewModel {
                 this.payment_date = payment_date;
             }
 
-            public int getGross_amount() {
+            public String getGross_amount() {
                 return gross_amount;
             }
 
-            public void setGross_amount(int gross_amount) {
+            public void setGross_amount(String gross_amount) {
                 this.gross_amount = gross_amount;
             }
         }
@@ -333,9 +333,9 @@ public class InvoiceViewModel {
              */
 
             private String description;
-            private int amount;
-            private int tax;
-            private int total_amount;
+            private String amount;
+            private String tax;
+            private String total_amount;
 
             public String getDescription() {
                 return description;
@@ -345,27 +345,27 @@ public class InvoiceViewModel {
                 this.description = description;
             }
 
-            public int getAmount() {
+            public String getAmount() {
                 return amount;
             }
 
-            public void setAmount(int amount) {
+            public void setAmount(String amount) {
                 this.amount = amount;
             }
 
-            public int getTax() {
+            public String getTax() {
                 return tax;
             }
 
-            public void setTax(int tax) {
+            public void setTax(String tax) {
                 this.tax = tax;
             }
 
-            public int getTotal_amount() {
+            public String getTotal_amount() {
                 return total_amount;
             }
 
-            public void setTotal_amount(int total_amount) {
+            public void setTotal_amount(String total_amount) {
                 this.total_amount = total_amount;
             }
         }

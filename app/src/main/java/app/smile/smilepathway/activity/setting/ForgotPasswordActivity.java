@@ -84,7 +84,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements Respons
         if (!Common.getConnectivityStatus(this))
             Utils.showInfoMsg(this, getString(R.string.internet_connection_msg));
         else if (edtEmail.getText().toString().trim().equalsIgnoreCase("")) {
-            Utils.showInfoMsg(this, getString(R.string.enter_emailaddress_msg));
+            Utils.showInfoMsg(this, getString(R.string.enter_name_id_msg));
         } else
             serverRequestForSignin();
     }

@@ -97,11 +97,13 @@ public class ChangePasswordActivity extends AppCompatActivity implements Respons
                 edtOldPassword.setVisibility(View.GONE);
                 ivToggleOldPassword.setVisibility(View.GONE);
                 userId = getIntent().getStringExtra("user_id");
+                tvChangePassword.setText(getString(R.string.reset_password));
             } else {
                 tvOldPassword.setVisibility(View.VISIBLE);
                 edtOldPassword.setVisibility(View.VISIBLE);
                 ivToggleOldPassword.setVisibility(View.VISIBLE);
                 userId = getIntent().getStringExtra("user_id");
+                tvChangePassword.setText(getString(R.string.change_password));
             }
         }
     }

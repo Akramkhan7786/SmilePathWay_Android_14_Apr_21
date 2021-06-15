@@ -159,9 +159,10 @@
     <string name="martin_garrix">Martin Garrix</string>
     <string name="appointment">Appointment</string>
     <string name="smile_appo">Smile Appointer</string>
-    <string name="treatment_plan">Smile plan</string>
+    <string name="treatment_plan">Smile Plan</string>
     <string name="treatment_list">Treatment List</string>
     <string name="change_password">Change Password</string>
+    <string name="reset_password">Reset Password</string>
     <string name="log_out">Log Out</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>

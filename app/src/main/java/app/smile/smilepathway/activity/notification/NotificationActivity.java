@@ -87,6 +87,7 @@ public class NotificationActivity extends AppCompatActivity implements ResponseD
         requestedServiceDataModel.setBaseRequestData(baseRequestData);
         requestedServiceDataModel.execute();
     }
+
     private void notificationAllList() {
         requestedServiceDataModel = new RequestedServiceDataModel(this, this);
         BaseRequestData baseRequestData = new BaseRequestData();
